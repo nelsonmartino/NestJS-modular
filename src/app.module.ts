@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
+import { environments } from './environments';
 
 //* Lo saco de acá para llevarlo a database.module y utilizarlo como módulo global
 // const API_KEY = 'xyz1234';
@@ -16,7 +17,8 @@ import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
+      // envFilePath: '.env',
+      envFilePath: environments[process.env.NODE_ENV] || '.env',
       isGlobal: true, //* Otra manera de hacer global un recurso
     }),
     HttpModule,
