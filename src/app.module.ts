@@ -9,6 +9,8 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
 import { environments } from './environments';
+//*Tipado en config
+import config from './config';
 
 //* Lo saco de acá para llevarlo a database.module y utilizarlo como módulo global
 // const API_KEY = 'xyz1234';
@@ -19,6 +21,8 @@ import { environments } from './environments';
     ConfigModule.forRoot({
       // envFilePath: '.env',
       envFilePath: environments[process.env.NODE_ENV] || '.env',
+      //*Tipado en config
+      load: [config],
       isGlobal: true, //* Otra manera de hacer global un recurso
     }),
     HttpModule,
