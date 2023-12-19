@@ -2,6 +2,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios'; //* useFactory a partir de nest versión 8
+import * as Joi from 'joi'; //* Para hacer tipado de variables de entorno
+
 import { lastValueFrom } from 'rxjs'; //* useFactory a partir de nest versión 8 para reemplazar .toPromise()
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -24,6 +26,11 @@ import config from './config';
       //*Tipado en config
       load: [config],
       isGlobal: true, //* Otra manera de hacer global un recurso
+      validationSchema: Joi.object({
+        API_KEY: Joi.number().required(),
+        DATABASE_NAME: Joi.string().required(),
+        DATABASE_PORT: Joi.number().required(),
+      }),
     }),
     HttpModule,
     UsersModule,
