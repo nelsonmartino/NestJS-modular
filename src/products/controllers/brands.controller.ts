@@ -9,14 +9,18 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+
 import { BrandsService } from '../services/brands.service';
 import { CreateBrandDto, UpdateBrandDto } from '../dtos/brand.dtos';
 
+@ApiTags('brands')
 @Controller('brands')
 export class BrandsController {
   constructor(private brandsService: BrandsService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Brands list' })
   findAll() {
     return this.brandsService.findAll();
   }

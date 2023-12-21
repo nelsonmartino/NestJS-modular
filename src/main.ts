@@ -20,7 +20,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
-
+  app.enableCors(); //* Para habilitar el acceso desde cualquier lugar
   await app.listen(3000);
 }
 bootstrap();
