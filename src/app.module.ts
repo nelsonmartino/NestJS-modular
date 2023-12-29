@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios'; //* useFactory a partir de nest versión 8
 import * as Joi from 'joi'; //* Para hacer tipado de variables de entorno
+// import { MongoClient } from 'mongodb'; //* Para hacer conexión a la base de datos
 
 import { lastValueFrom } from 'rxjs'; //* useFactory a partir de nest versión 8 para reemplazar .toPromise()
 import { AppController } from './app.controller';
@@ -13,6 +14,20 @@ import { DatabaseModule } from './database/database.module';
 import { environments } from './environments';
 //*Tipado en config
 import config from './config';
+
+// const uri =
+//   'mongodb+srv://nelsonmartino:dJng3BRJzKsJZSi5@cluster0.ubsvkzu.mongodb.net/';
+
+// //! Conexión a base de datos mongo con driver oficial de mongo
+// const client = new MongoClient(uri);
+// async function run() {
+//   await client.connect();
+//   const database = client.db('test');
+//   const taskCollection = database.collection('tasks');
+//   const tasks = await taskCollection.find().toArray();
+//   console.log(tasks);
+// }
+// run();
 
 //* Lo saco de acá para llevarlo a database.module y utilizarlo como módulo global
 // const API_KEY = 'xyz1234';

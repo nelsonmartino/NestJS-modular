@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Db } from 'mongodb';
 
 //*Para uso de tipado en config
 import { ConfigType } from '@nestjs/config';
@@ -10,6 +11,7 @@ export class AppService {
   constructor(
     // @Inject('API_KEY') private apiKey: string,
     @Inject('TASKS') private tasks: any[],
+    @Inject('MONGO') private database: Db,
     // private config: ConfigService,
     //*Tipado en config
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
@@ -24,5 +26,9 @@ export class AppService {
     console.log(this.tasks);
     // return `Hello World! ${this.apiKey}`;
     return `Hello World! ${apiKey} ${name}`;
+  }
+  getTasks() {
+    const taskCollection = this.database.collection('tasks');
+    return taskCollection.find().toArray(); 
   }
 }
