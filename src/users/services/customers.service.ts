@@ -64,12 +64,20 @@ export class CustomersService {
     return this.customers;
   }
 
-  getOrderByUser(id: number): Order {
+  // getOrderByUser(id: number): Order {
+  //   const customer = this.findOne(id);
+  //   return {
+  //     date: new Date(),
+  //     customer,
+  //     products: this.productsService.findAll(),
+  //   };
+  // }
+  async getOrderByUser(id: number) {
     const customer = this.findOne(id);
     return {
       date: new Date(),
       customer,
-      products: this.productsService.findAll(),
+      products: await this.productsService.findAll(),
     };
   }
 }
